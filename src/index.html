@@ -1,13 +1,201 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hyerd</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script type="module" src="js/main.js" type="module"></script>
+        <title>Hyerd | Home</title>
+    </head>
+    <body>
+        <header class="p-5">
+            <div class="grid grid-cols-3 items-center">
+                <a href="/">
+                    <img
+                        src="/icons/hyerd-logo.png"
+                        alt="Hyerd Logo"
+                        width="80"
+                        height="auto"
+                    />
+                </a>
+                <nav>
+                    <ul class="flex items-center gap-12">
+                        <li><a href="/jobs">Jobs</a></li>
+                        <li><a href="/favourites">Favourites</a></li>
+                        <li><a href="/d">Dashboards</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section
+                class="relative flex items-center min-h-130 bg-primary overflow-hidden"
+            >
+                <div class="absolute inset-0">
+                    <img
+                        src="/images/hero-image.png"
+                        alt=""
+                        class="w-full h-full object-cover opacity-20"
+                    />
+                </div>
+                <div class="wrapper relative z-10">
+                    <h1 class="text-white mb-6 leading-tight">
+                        Find Your <span class="text-accent">Dream Job</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-8">
+                        Browse thousands of job listings from top companies and
+                        take the next step in your career.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a
+                            href="/jobs"
+                            class="btn-accent px-6 py-3 rounded-full text-lg font-semibold inline-block"
+                            >Get started</a
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <section class="wrapper my-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h2>Latest Jobs</h2>
+                    <a href="/jobs" class="text-accent font-semibold text-sm hover:underline">View all &rarr;</a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <article class="job-card">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="size-12 rounded-lg bg-accent/20 flex items-center justify-center font-bold text-primary text-lg">
+                                G
+                            </div>
+                            <button class="text-gray-400 hover:text-accent transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                            </button>
+                        </div>
+                        <h3 class="text-lg mb-1">Senior Frontend Developer</h3>
+                        <p class="text-gray-500 text-sm mb-3">Google</p>
+                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                Mountain View, CA
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                $120k - $180k
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="job-tag bg-primary/10 text-primary">Full-time</span>
+                            <span class="job-tag bg-accent/10 text-accent">Remote</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-gray-400">
+                            <span>Posted 2 days ago</span>
+                            <a href="/jobs" class="text-primary font-semibold hover:underline">Apply now</a>
+                        </div>
+                    </article>
+
+                    <article class="job-card">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="size-12 rounded-lg bg-blue-100 flex items-center justify-center font-bold text-blue-700 text-lg">
+                                A
+                            </div>
+                            <button class="text-gray-400 hover:text-accent transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                            </button>
+                        </div>
+                        <h3 class="text-lg mb-1">Product Designer</h3>
+                        <p class="text-gray-500 text-sm mb-3">Apple</p>
+                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                Cupertino, CA
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                $100k - $150k
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="job-tag bg-primary/10 text-primary">Full-time</span>
+                            <span class="job-tag bg-accent/10 text-accent">Remote</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-gray-400">
+                            <span>Posted 5 days ago</span>
+                            <a href="/jobs" class="text-primary font-semibold hover:underline">Apply now</a>
+                        </div>
+                    </article>
+
+                    <article class="job-card">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="size-12 rounded-lg bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-lg">
+                                S
+                            </div>
+                            <button class="text-gray-400 hover:text-accent transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+                            </button>
+                        </div>
+                        <h3 class="text-lg mb-1">Backend Engineer</h3>
+                        <p class="text-gray-500 text-sm mb-3">Spotify</p>
+                        <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                New York, NY
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                $130k - $190k
+                            </span>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="job-tag bg-primary/10 text-primary">Full-time</span>
+                            <span class="job-tag bg-accent/10 text-accent">Remote</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs text-gray-400">
+                            <span>Posted 1 week ago</span>
+                            <a href="/jobs" class="text-primary font-semibold hover:underline">Apply now</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-primary text-gray-300 mt-20">
+            <div class="wrapper py-12">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="md:col-span-2">
+                        <img
+                            src="/icons/hyerd-logo.png"
+                            alt="Hyerd Logo"
+                            width="80"
+                            class="brightness-0 invert mb-4"
+                        />
+                        <p class="text-sm max-w-md">
+                            Connecting talented professionals with their dream
+                            careers. Browse thousands of job listings from top
+                            companies worldwide.
+                        </p>
+                    </div>
+                    <div>
+                        <h6 class="text-white mb-3">For Candidates</h6>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="/jobs" class="hover:text-accent transition-colors">Browse Jobs</a></li>
+                            <li><a href="/favourites" class="hover:text-accent transition-colors">Favourites</a></li>
+                            <li><a href="/d" class="hover:text-accent transition-colors">Dashboard</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h6 class="text-white mb-3">Company</h6>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="/about" class="hover:text-accent transition-colors">About Us</a></li>
+                            <li><a href="/contact" class="hover:text-accent transition-colors">Contact</a></li>
+                            <li><a href="/privacy" class="hover:text-accent transition-colors">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-center">
+                    &copy; 2026 Hyerd. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
