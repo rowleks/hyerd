@@ -1,0 +1,68 @@
+<div class="flex items-center justify-between">
+    <a href="/">
+        <img
+            src="/icons/hyerd-logo.png"
+            alt="Hyerd Logo"
+            width="80"
+            height="auto"
+        />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:block">
+        <ul class="flex items-center gap-12">
+            <li>
+                <a href="/jobs" class="hover:text-accent transition-colors"
+                    >Jobs</a
+                >
+            </li>
+            <li>
+                <a
+                    href="/favourites"
+                    class="hover:text-accent transition-colors"
+                    >Favourites</a
+                >
+            </li>
+            <li>
+                <a href="/d" class="hover:text-accent transition-colors"
+                    >Dashboards</a
+                >
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-button" class="lg:hidden">
+        <img
+            src="/icons/hamburger-menu.svg"
+            alt="Menu"
+            width="32"
+            height="32"
+        />
+    </button>
+</div>
+
+<!-- Mobile Navigation -->
+<nav id="mobile-menu" class="hidden lg:hidden mt-4">
+    <ul class="flex flex-col space-y-4">
+        <li>
+            <a
+                href="/jobs"
+                class="block py-2 hover:text-accent transition-colors"
+                >Jobs</a
+            >
+        </li>
+        <li>
+            <a
+                href="/favourites"
+                class="block py-2 hover:text-accent transition-colors"
+                >Favourites</a
+            >
+        </li>
+        <li>
+            <a href="/d" class="block py-2 hover:text-accent transition-colors"
+                >Dashboards</a
+            >
+        </li>
+    </ul>
+</nav>
