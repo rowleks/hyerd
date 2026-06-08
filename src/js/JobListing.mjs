@@ -55,42 +55,47 @@ export default class JobListing {
     if (!template) return null;
 
     const clone = template.content.cloneNode(true);
-    const article = clone.getElementById("job-card");
+    const article = clone.querySelector("#job-card");
 
     // Set company logo
-    const logo = article.querySelector("#company-logo img");
-    logo.src = job.logo || "";
-    logo.alt = job.organization || "Unknown";
+    const logoContainer = article.querySelector("#company-logo");
+    const logoImg = logoContainer.querySelector("img");
+    if (job.logo) {
+      logoImg.src = job.logo;
+      logoImg.alt = job.organization || "Company";
+      logoImg.style.display = "block";
+    } else {
+      logoImg.style.display = "none";
+    }
 
     // Set job title
-    const title = article.getElementById("job-title");
+    const title = article.querySelector("#job-title");
     title.textContent = job.title || "N/A";
 
     // Set company name
-    const company = article.getElementById("company-name");
-    company.textContent = companyName;
+    const company = article.querySelector("#company-name");
+    company.textContent = job.organization || "N/A";
 
     // Set location
-    const location = article.getElementById("job-location");
-    location.textContent = job.location || "Location Not Specified";
+    const location = article.querySelector("#job-location");
+    location.textContent = job.location || "N/A";
 
     // Set salary if available
-    const salary = article.getElementById("job-salary");
-    salary.textContent = job.salary_raw || job.salary || "N/A";
+    const salary = article.querySelector("#job-salary");
+    salary.textContent = job.salary || "N/A";
 
     // Set job type and remote status
-    const tagsContainer = article.getElementById("job-tags");
+    const tagsContainer = article.querySelector("#job-tags");
     tagsContainer.innerHTML = ""; // Clear existing tags
 
     // Add job type tag
-    const jobType = job.type || "FULL_TIME";
     const typeTag = document.createElement("span");
     typeTag.className = "job-tag bg-primary/10 text-primary";
-    typeTag.textContent = this.#formatJobType(jobType);
+    typeTag.textContent = this.#formatJobType(job.type);
     tagsContainer.appendChild(typeTag);
 
     // Add remote status tag if applicable
-    if (job.remote || job.remote === true) {
+    if (job.remote) {
       const remoteTag = document.createElement("span");
       remoteTag.className = "job-tag bg-accent/10 text-accent";
       remoteTag.textContent = "Remote";
@@ -98,22 +103,17 @@ export default class JobListing {
     }
 
     // Set posted date
-    const postedDate = article.getElementById("job-date");
-    postedDate.textContent = this.#formatDate(job.date || job.created_at);
+    const postedDate = article.querySelector("#job-date");
+    postedDate.textContent = this.#formatDate(job.date);
 
     // Set apply link
-    const applyLink = article.getElementById("apply-link");
-    const jobId = job.id || job.linkedin_id || job.slug;
-    if (jobId) {
-      applyLink.href = `/jobs/${jobId}`;
-    } else {
-      applyLink.href = "/jobs";
-    }
+    const applyLink = article.querySelector("#apply-link");
+    applyLink.href = job.url;
 
     // Add bookmark button functionality
-    const bookmarkBtn = article.getElementById("bookmark-btn");
+    const bookmarkBtn = article.querySelector("#bookmark-btn");
     bookmarkBtn.addEventListener("click", () =>
-      this.#toggleBookmark(article, jobId),
+      this.#toggleBookmark(article, job.id),
     );
 
     return article;
@@ -135,12 +135,11 @@ export default class JobListing {
     if (!dateString) return "Posted recently";
 
     const date = parseISO(dateString);
-
     return formatDistanceToNow(date, { addSuffix: true });
   }
 
   #toggleBookmark(cardElement, jobId) {
-    const bookmarkBtn = cardElement.querySelector("button svg");
+    const bookmarkBtn = cardElement.querySelector("#bookmark-btn svg");
     const isBookmarked = bookmarkBtn.getAttribute("fill") === "currentColor";
 
     if (isBookmarked) {
