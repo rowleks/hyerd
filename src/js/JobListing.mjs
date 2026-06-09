@@ -1,6 +1,5 @@
-// import { qs } from "./utils.mjs";
-
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { qs } from "./utils.mjs";
 
 export default class JobListing {
   constructor(datasource) {
@@ -23,9 +22,6 @@ export default class JobListing {
   }
 
   renderJobs() {
-    if (!this.container) return;
-
-    // Render each job using the template
     this.jobs.forEach((job) => {
       const extractedData = this.#extractJobData(job);
       const jobCard = this.#createJobCard(extractedData);
@@ -36,6 +32,7 @@ export default class JobListing {
   }
 
   #extractJobData(job) {
+    if (!job) return null;
     return {
       id: job.id,
       title: job.title || "",
@@ -55,11 +52,10 @@ export default class JobListing {
     if (!template) return null;
 
     const clone = template.content.cloneNode(true);
-    const article = clone.querySelector("#job-card");
+    const article = clone.querySelector(".job-card");
 
     // Set company logo
-    const logoContainer = article.querySelector("#company-logo");
-    const logoImg = logoContainer.querySelector("img");
+    const logoImg = qs(".company-logo img", article);
     if (job.logo) {
       logoImg.src = job.logo;
       logoImg.alt = job.organization || "Company";
@@ -68,50 +64,27 @@ export default class JobListing {
       logoImg.style.display = "none";
     }
 
-    // Set job title
-    const title = article.querySelector("#job-title");
-    title.textContent = job.title || "N/A";
-
-    // Set company name
-    const company = article.querySelector("#company-name");
-    company.textContent = job.organization || "N/A";
-
-    // Set location
-    const location = article.querySelector("#job-location");
-    location.textContent = job.location || "N/A";
-
-    // Set salary if available
-    const salary = article.querySelector("#job-salary");
-    salary.textContent = job.salary || "N/A";
-
-    // Set job type and remote status
-    const tagsContainer = article.querySelector("#job-tags");
-    tagsContainer.innerHTML = ""; // Clear existing tags
+    qs(".job-title", article).textContent = job.title || "N/A";
+    qs(".company-name", article).textContent = job.organization || "N/A";
+    qs(".job-location", article).textContent = job.location || "N/A";
+    qs(".job-salary", article).textContent = job.salary || "N/A";
 
     // Add job type tag
-    const typeTag = document.createElement("span");
-    typeTag.className = "job-tag bg-primary/10 text-primary";
-    typeTag.textContent = this.#formatJobType(job.type);
-    tagsContainer.appendChild(typeTag);
+    qs(".job-type-tag", article).textContent =
+      this.#formatJobType(job.type) || "Full Time";
 
-    // Add remote status tag if applicable
+    // Add remote tag if applicable
     if (job.remote) {
-      const remoteTag = document.createElement("span");
-      remoteTag.className = "job-tag bg-accent/10 text-accent";
-      remoteTag.textContent = "Remote";
-      tagsContainer.appendChild(remoteTag);
+      qs(".job-remote-tag", article).textContent = "Remote";
+    } else {
+      qs(".job-remote-tag", article).style.display = "none";
     }
 
-    // Set posted date
-    const postedDate = article.querySelector("#job-date");
-    postedDate.textContent = this.#formatDate(job.date);
-
-    // Set apply link
-    const applyLink = article.querySelector("#apply-link");
-    applyLink.href = job.url;
+    qs(".job-date", article).textContent = this.#formatDate(job.date) || "N/A";
+    qs(".apply-link", article).href = job.url || "#";
 
     // Add bookmark button functionality
-    const bookmarkBtn = article.querySelector("#bookmark-btn");
+    const bookmarkBtn = qs(".bookmark-btn", article);
     bookmarkBtn.addEventListener("click", () =>
       this.#toggleBookmark(article, job.id),
     );
@@ -127,6 +100,7 @@ export default class JobListing {
       INTERN: "Internship",
       TEMPORARY: "Temporary",
       VOLUNTEER: "Volunteer",
+      OTHER: "Other",
     };
     return typeMap[type] || type;
   }
@@ -135,11 +109,14 @@ export default class JobListing {
     if (!dateString) return "Posted recently";
 
     const date = parseISO(dateString);
-    return formatDistanceToNow(date, { addSuffix: true });
+    const distance = formatDistanceToNow(date, { addSuffix: true });
+
+    // Capitalize first letter
+    return distance.charAt(0).toUpperCase() + distance.slice(1);
   }
 
   #toggleBookmark(cardElement, jobId) {
-    const bookmarkBtn = cardElement.querySelector("#bookmark-btn svg");
+    const bookmarkBtn = cardElement.querySelector(".bookmark-btn svg");
     const isBookmarked = bookmarkBtn.getAttribute("fill") === "currentColor";
 
     if (isBookmarked) {
@@ -155,8 +132,6 @@ export default class JobListing {
   }
 
   renderError() {
-    if (!this.container) return;
-
     const errorDiv = document.createElement("div");
     errorDiv.className = "col-span-full text-center py-8";
     errorDiv.innerHTML = `

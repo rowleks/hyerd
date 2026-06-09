@@ -54,17 +54,15 @@
                 >
                     <!--Job card template-->
                     <template id="job-card-template">
-                        <article id="job-card" class="job-card">
+                        <article class="job-card">
                             <div class="flex items-start justify-between mb-4">
                                 <div
-                                    id="company-logo"
-                                    class="size-12 rounded-lg bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-lg"
+                                    class="company-logo size-12 rounded-lg bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-lg"
                                 >
                                     <img src="" alt="" class="w-full h-full" />
                                 </div>
                                 <button
-                                    id="bookmark-btn"
-                                    class="text-gray-400 hover:text-accent transition-colors"
+                                    class="bookmark-btn text-gray-400 hover:text-accent transition-colors"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -81,17 +79,15 @@
                                     </svg>
                                 </button>
                             </div>
-                            <h3 id="job-title" class="text-lg mb-1"></h3>
+                            <h3 class="job-title text-lg mb-1"></h3>
                             <p
-                                id="company-name"
-                                class="text-gray-500 text-sm mb-3"
+                                class="company-name text-gray-500 text-sm mb-3"
                             ></p>
                             <div
                                 class="flex items-center gap-3 text-xs text-gray-400 mb-3"
                             >
                                 <span
-                                    id="location-wrapper"
-                                    class="flex items-center gap-1"
+                                    class="location-wrapper flex items-center gap-1"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -107,11 +103,10 @@
                                         />
                                         <circle cx="12" cy="10" r="3" />
                                     </svg>
-                                    <span id="job-location"></span>
+                                    <span class="job-location"></span>
                                 </span>
                                 <span
-                                    id="salary-wrapper"
-                                    class="flex items-center gap-1"
+                                    class="salary-wrapper flex items-center gap-1"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -127,30 +122,24 @@
                                             d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
                                         />
                                     </svg>
-                                    <span id="job-salary"></span>
+                                    <span class="job-salary"></span>
                                 </span>
                             </div>
-                            <div
-                                id="job-tags"
-                                class="flex flex-wrap gap-2 mb-4"
-                            >
+                            <div class="job-tags flex flex-wrap gap-2 mb-4">
                                 <span
-                                    class="job-tag bg-primary/10 text-primary"
+                                    class="job-type-tag bg-primary/10 text-primary"
                                 ></span>
                                 <span
-                                    class="job-tag bg-accent/10 text-accent"
+                                    class="job-remote-tag bg-accent/10 text-accent"
                                 ></span>
                             </div>
                             <div
-                                id="footer-wrapper"
-                                class="flex items-center justify-between text-xs text-gray-400"
+                                class="footer-wrapper flex items-center justify-between text-xs text-gray-400"
                             >
-                                <span id="job-date" class="capitalize"></span>
+                                <span class="job-date"></span>
                                 <a
-                                    id="apply-link"
+                                    class="apply-link text-primary font-semibold hover:underline"
                                     href=""
-                                    class="text-primary font-semibold hover:underline"
-                                    target="_blank"
                                     >Apply now</a
                                 >
                             </div>
