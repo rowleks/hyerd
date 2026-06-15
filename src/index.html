@@ -105,25 +105,6 @@
                                     </svg>
                                     <span class="job-location"></span>
                                 </span>
-                                <span
-                                    class="salary-wrapper flex items-center gap-1"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="14"
-                                        height="14"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                    >
-                                        <path d="M12 1v22" />
-                                        <path
-                                            d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
-                                        />
-                                    </svg>
-                                    <span class="job-salary"></span>
-                                </span>
                             </div>
                             <div class="job-tags flex flex-wrap gap-2 mb-4">
                                 <span
@@ -140,6 +121,7 @@
                                 <a
                                     class="apply-link text-primary font-semibold hover:underline"
                                     href=""
+                                    target="_blank"
                                     >Apply now</a
                                 >
                             </div>
@@ -149,6 +131,26 @@
             </section>
         </main>
 
+        <dialog
+            id="job-modal"
+            class="job-modal rounded-xl p-0 max-w-3xl w-full m-auto backdrop:bg-black/50"
+        >
+            <div class="flex items-center justify-between p-6 border-b">
+                <h3 class="modal-title"></h3>
+                <button class="modal-close text-gray-400 hover:text-gray-600">
+                    ✕
+                </button>
+            </div>
+            <div
+                class="modal-body p-6 max-h-[70vh] overflow-auto prose prose-sm"
+            ></div>
+            <div class="p-6 border-t flex justify-end gap-3">
+                <button class="modal-close btn-secondary">Close</button>
+                <a class="modal-apply btn-accent px-6 py-2 rounded-md" href=""
+                    >Apply now</a
+                >
+            </div>
+        </dialog>
         <footer class="bg-primary text-gray-300 mt-20"></footer>
     </body>
 </html>

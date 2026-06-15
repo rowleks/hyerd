@@ -1,10 +1,12 @@
-const linkedInUrl = import.meta.env.VITE_LINKEDIN_URL;
+// const linkedInUrl = import.meta.env.VITE_LINKEDIN_URL;
 
 export default class ExternalServices {
   async getLatestJobs() {
     try {
-      const url = `${linkedInUrl}/active-jb-24h?limit=10&offset=0&title_filter="Developer"&location_filter="United States" OR "Canada"&description_type=html`;
-      const latestJobs = await this.#fetchData(encodeURI(url));
+      /* const url = `${linkedInUrl}/active-jb-24h?limit=4&offset=0&title_filter="Developer"&location_filter="United States" OR "Canada"&description_type=html`;
+      const latestJobs = await this.#fetchData(encodeURI(url)); */
+
+      const latestJobs = await this.#fetchData("/json/linkedinJobs.json");
       console.log(latestJobs);
       return latestJobs;
     } catch (error) {
@@ -13,14 +15,15 @@ export default class ExternalServices {
   }
 
   async #fetchData(url) {
-    const res = await fetch(url, {
+    /*  const options = {
       method: "GET",
       headers: {
         "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
         "x-rapidapi-host": new URL(url).hostname,
         "Content-Type": "application/json",
       },
-    });
+    }; */
+    const res = await fetch(url);
 
     if (!res.ok) {
       throw {

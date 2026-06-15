@@ -38,12 +38,12 @@ export default class JobListing {
       title: job.title || "",
       organization: job.organization || "",
       location: job.locations_derived?.[0] || job.cities_derived?.[0] || "",
-      salary: job.salary_raw || "",
       type: job.employment_type?.[0] || "FULL_TIME",
       remote: job.remote_derived || false,
       date: job.date_posted || job.date_created,
       url: job.url,
       logo: job.organization_logo,
+      description: job.description_html || "",
     };
   }
 
@@ -53,6 +53,15 @@ export default class JobListing {
 
     const clone = template.content.cloneNode(true);
     const article = clone.querySelector(".job-card");
+
+    article.addEventListener("click", (e) => {
+      if (
+        !e.target.closest(".bookmark-btn") &&
+        !e.target.closest(".apply-link")
+      ) {
+        this.#showJobModal(job);
+      }
+    });
 
     // Set company logo
     const logoImg = qs(".company-logo img", article);
@@ -67,7 +76,6 @@ export default class JobListing {
     qs(".job-title", article).textContent = job.title || "N/A";
     qs(".company-name", article).textContent = job.organization || "N/A";
     qs(".job-location", article).textContent = job.location || "N/A";
-    qs(".job-salary", article).textContent = job.salary || "N/A";
 
     // Add job type tag
     qs(".job-type-tag", article).textContent =
@@ -141,5 +149,24 @@ export default class JobListing {
       </button>
     `;
     this.container.appendChild(errorDiv);
+  }
+
+  #showJobModal(job) {
+    const modal = document.getElementById("job-modal");
+    if (!modal) return;
+
+    qs(".modal-title", modal).textContent = job.title || "Job Details";
+    qs(".modal-body", modal).innerHTML =
+      job.description || "<p>No description available.</p>";
+    const applyLink = qs(".modal-apply", modal);
+    applyLink.href = job.url || "#";
+
+    modal.showModal();
+
+    modal
+      .querySelectorAll(".modal-close")
+      .forEach((btn) =>
+        btn.addEventListener("click", () => modal.close(), { once: true }),
+      );
   }
 }

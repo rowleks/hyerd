@@ -71,6 +71,21 @@
     .wrapper {
         @apply px-5 mx-auto container;
     }
+
+    .job-modal {
+        @apply bg-white rounded-xl shadow-xl border border-gray-200;
+    }
+
+    .job-modal .prose {
+        @apply max-w-none text-gray-700;
+    }
+
+    .job-modal .prose h1,
+    .job-modal .prose h2,
+    .job-modal .prose h3,
+    .job-modal .prose h4 {
+        @apply font-sans text-primary;
+    }
 }
 
 @layer utilities {
