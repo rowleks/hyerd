@@ -1,4 +1,6 @@
-import { qs } from "./utils.mjs";
+import { qs, getFromLocalStorage, saveToLocalStorage } from "./utils.mjs";
+
+const FAV_KEY = "hyerd_favourites";
 
 export default class JSearchJobListing {
   constructor(dataSource) {
@@ -165,7 +167,7 @@ export default class JSearchJobListing {
 
     const bookmarkBtn = qs(".bookmark-btn", article);
     bookmarkBtn.addEventListener("click", () =>
-      this.#toggleBookmark(article, job.id),
+      this.#toggleBookmark(article, job),
     );
 
     return article;
@@ -192,19 +194,26 @@ export default class JSearchJobListing {
     return dateString;
   }
 
-  #toggleBookmark(cardElement, jobId) {
+  #toggleBookmark(cardElement, job) {
     const bookmarkBtn = cardElement.querySelector(".bookmark-btn svg");
     const isBookmarked = bookmarkBtn.getAttribute("fill") === "currentColor";
+
+    let favourites = getFromLocalStorage(FAV_KEY) || [];
 
     if (isBookmarked) {
       bookmarkBtn.setAttribute("fill", "none");
       bookmarkBtn.classList.remove("text-accent");
       bookmarkBtn.classList.add("text-gray-400");
+      favourites = favourites.filter((j) => j.id !== job.id);
     } else {
       bookmarkBtn.setAttribute("fill", "currentColor");
       bookmarkBtn.classList.remove("text-gray-400");
       bookmarkBtn.classList.add("text-accent");
+      if (!favourites.some((j) => j.id === job.id)) {
+        favourites.push(job);
+      }
     }
+    saveToLocalStorage(FAV_KEY, favourites);
   }
 
   renderError() {

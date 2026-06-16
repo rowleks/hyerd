@@ -20,6 +20,20 @@ export const qs = (selector, parent = document) => {
   return parent.querySelector(selector);
 };
 
+// LocalStorage helpers
+export const saveToLocalStorage = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+export const getFromLocalStorage = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+};
+
+export const removeFromLocalStorage = (key) => {
+  localStorage.removeItem(key);
+};
+
 export const loadHeaderFooter = async () => {
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");

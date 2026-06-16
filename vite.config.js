@@ -11,6 +11,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         jobs: resolve(__dirname, "src/jobs.html"),
+        favourites: resolve(__dirname, "src/favourites.html"),
       },
     },
   },
