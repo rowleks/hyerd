@@ -14,6 +14,10 @@ export default class ExternalServices {
     }
   }
 
+  async getJSearchJobs() {
+    return this.#fetchData("/json/jSearchJobs.json");
+  }
+
   async #fetchData(url) {
     /*  const options = {
       method: "GET",

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="js/jobs.js" type="module"></script>
+        <title>Hyerd | Jobs</title>
+    </head>
+    <body>
+        <header class="p-5"></header>
+
+        <main class="wrapper my-8">
+            <h1 class="mb-6">Find Jobs</h1>
+
+            <!-- Search -->
+            <div class="mb-6">
+                <input
+                    id="job-search"
+                    type="text"
+                    placeholder="Search by title or location..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:border-accent"
+                />
+            </div>
+
+            <!-- Sidebar + Jobs -->
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Filters Sidebar -->
+                <aside class="lg:w-64 flex-shrink-0">
+                    <div class="lg:sticky lg:top-4 space-y-6">
+                        <!-- Employment Type -->
+                        <div>
+                            <h4
+                                class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500"
+                            >
+                                Employment Type
+                            </h4>
+                            <div
+                                id="filter-employment"
+                                class="space-y-1 text-sm"
+                            ></div>
+                        </div>
+
+                        <!-- Remote -->
+                        <div>
+                            <h4
+                                class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500"
+                            >
+                                Work Arrangement
+                            </h4>
+                            <label class="flex items-center gap-2 text-sm">
+                                <input
+                                    type="checkbox"
+                                    id="filter-remote"
+                                    class="accent-accent"
+                                />
+                                Remote only
+                            </label>
+                        </div>
+
+                        <!-- Location -->
+                        <div>
+                            <h4
+                                class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500"
+                            >
+                                Location
+                            </h4>
+                            <div
+                                id="filter-location"
+                                class="space-y-1 text-sm max-h-48 overflow-auto pr-1"
+                            ></div>
+                        </div>
+
+                        <!-- Date Posted -->
+                        <div>
+                            <h4
+                                class="font-semibold mb-2 text-sm uppercase tracking-wide text-gray-500"
+                            >
+                                Date Posted
+                            </h4>
+                            <select
+                                id="filter-date"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-accent"
+                            >
+                                <option value="all">Any time</option>
+                                <option value="today">Today</option>
+                                <option value="3days">Last 3 days</option>
+                                <option value="week">Last week</option>
+                                <option value="month">Last month</option>
+                            </select>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Job Grid -->
+                <div class="flex-1">
+                    <div
+                        id="job-cards-container"
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
+                    ></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Job card template (outside any container) -->
+        <template id="job-card-template">
+            <article class="job-card cursor-pointer">
+                <div class="flex items-start justify-between mb-4">
+                    <div
+                        class="company-logo size-12 rounded-lg bg-emerald-100 flex items-center justify-center font-bold text-emerald-700 text-lg"
+                    >
+                        <img src="" alt="" class="w-full h-full" />
+                    </div>
+                    <button
+                        class="bookmark-btn text-gray-400 hover:text-accent transition-colors"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+                <h3 class="job-title text-lg mb-1"></h3>
+                <p class="company-name text-gray-500 text-sm mb-3"></p>
+                <div class="flex items-center gap-3 text-xs text-gray-400 mb-3">
+                    <span class="location-wrapper flex items-center gap-1">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path
+                                d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                            />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>
+                        <span class="job-location"></span>
+                    </span>
+                </div>
+                <div class="job-tags flex flex-wrap gap-2 mb-4">
+                    <span
+                        class="job-type-tag bg-primary/10 text-primary"
+                    ></span>
+                    <span
+                        class="job-remote-tag bg-accent/10 text-accent"
+                    ></span>
+                </div>
+                <div
+                    class="footer-wrapper flex items-center justify-between text-xs text-gray-400"
+                >
+                    <span class="job-date"></span>
+                    <a
+                        class="apply-link text-primary font-semibold hover:underline"
+                        href=""
+                        target="_blank"
+                        >Apply now</a
+                    >
+                </div>
+            </article>
+        </template>
+
+        <footer class="bg-primary text-gray-300 mt-20"></footer>
+    </body>
+</html>
