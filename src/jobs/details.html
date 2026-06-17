@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <script src="/js/jobDetails.js" type="module"></script>
+        <title>Hyerd | Job Details</title>
+    </head>
+    <body>
+        <header class="p-5"></header>
+
+        <main class="wrapper my-8 max-w-4xl">
+            <a
+                href="/jobs"
+                class="text-sm text-accent hover:underline mb-4 inline-block"
+                >&larr; Back to jobs</a
+            >
+
+            <div id="job-detail-content">
+                <!-- Populated by JS from template -->
+            </div>
+
+            <!-- Job Detail Template -->
+            <template id="job-detail-template">
+                <article
+                    class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8"
+                >
+                    <!-- Header -->
+                    <header class="flex items-start gap-6 mb-8">
+                        <img
+                            class="job-logo w-16 h-16 rounded-xl object-contain border bg-white hidden flex-shrink-0"
+                            alt=""
+                        />
+                        <div class="flex-1 min-w-0">
+                            <h1
+                                class="job-title text-3xl font-semibold text-gray-900 leading-tight tracking-tight"
+                            ></h1>
+                            <p
+                                class="job-organization text-xl text-gray-600 mt-1.5"
+                            ></p>
+                            <div
+                                class="job-meta flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-gray-500 mt-3"
+                            >
+                                <!-- Populated by JS: location • type • arrangement -->
+                            </div>
+                        </div>
+                    </header>
+
+                    <!-- Actions -->
+                    <div
+                        class="flex flex-wrap items-center gap-3 mb-8 pb-8 border-b border-gray-100"
+                    >
+                        <a
+                            class="job-apply-btn btn-accent px-8 py-3.5 rounded-full text-base font-semibold inline-flex items-center justify-center shadow-sm hover:shadow transition-all"
+                            href=""
+                            target="_blank"
+                        >
+                            Apply Now
+                        </a>
+                        <button
+                            id="save-btn"
+                            class="px-6 py-3.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-colors flex items-center gap-2"
+                        >
+                            <span>Save Job</span>
+                        </button>
+                    </div>
+
+                    <!-- Description -->
+                    <section class="mb-8">
+                        <h2
+                            class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2"
+                        >
+                            <span>Job Description</span>
+                        </h2>
+                        <div
+                            class="job-description text-[15px] text-gray-700 leading-relaxed space-y-4"
+                        ></div>
+                    </section>
+
+                    <!-- Responsibilities -->
+                    <section class="job-responsibilities mb-8 hidden">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                            Key Responsibilities
+                        </h3>
+                        <ul
+                            class="list-disc pl-5 space-y-2 text-[15px] text-gray-700 marker:text-gray-400"
+                        ></ul>
+                    </section>
+
+                    <!-- Requirements -->
+                    <section class="job-requirements mb-8 hidden">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                            Requirements
+                        </h3>
+                        <ul
+                            class="list-disc pl-5 space-y-2 text-[15px] text-gray-700 marker:text-gray-400"
+                        ></ul>
+                    </section>
+
+                    <!-- Benefits -->
+                    <section class="job-benefits mb-8 hidden">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                            Benefits &amp; Perks
+                        </h3>
+                        <ul
+                            class="list-disc pl-5 space-y-2 text-[15px] text-gray-700 marker:text-gray-400"
+                        ></ul>
+                    </section>
+
+                    <!-- Footer -->
+                    <footer
+                        class="job-footer pt-6 border-t border-gray-100 text-sm text-gray-500 flex items-center gap-2"
+                    >
+                        <!-- Populated by JS -->
+                    </footer>
+                </article>
+            </template>
+        </main>
+
+        <footer class="bg-primary text-gray-300 mt-20"></footer>
+    </body>
+</html>

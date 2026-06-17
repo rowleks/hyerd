@@ -18,6 +18,12 @@ export default class ExternalServices {
     return this.#fetchData("/json/jSearchJobs.json");
   }
 
+  async getJobDetails(jobId) {
+    // Stub: returns the full response; later replace with real /job-details call
+    const data = await this.#fetchData("/json/jobDetails.json");
+    return data;
+  }
+
   async #fetchData(url) {
     /*  const options = {
       method: "GET",
