@@ -1,5 +1,10 @@
 import { formatDistanceToNow, parseISO } from "date-fns";
-import { qs, getFromLocalStorage, saveToLocalStorage, markJobAsApplied } from "./utils.mjs";
+import {
+  qs,
+  getFromLocalStorage,
+  saveToLocalStorage,
+  markJobAsApplied,
+} from "./utils.mjs";
 
 const FAV_KEY = "hyerd_favourites";
 
@@ -15,7 +20,17 @@ export default class JobListing {
 
     try {
       const jobsData = await this.dataSource.getLatestJobs();
-      this.jobs = jobsData.data || jobsData || [];
+
+      if (Array.isArray(jobsData)) {
+        this.jobs = jobsData;
+      } else if (jobsData?.data && Array.isArray(jobsData.data)) {
+        this.jobs = jobsData.data;
+      } else if (jobsData?.jobs && Array.isArray(jobsData.jobs)) {
+        this.jobs = jobsData.jobs;
+      } else {
+        this.jobs = [];
+      }
+
       this.renderJobs();
     } catch (error) {
       console.error("Error loading jobs:", error);
@@ -24,6 +39,17 @@ export default class JobListing {
   }
 
   renderJobs() {
+    if (!this.container) return;
+    this.container.innerHTML = ""; // clear skeletons
+
+    if (!this.jobs || this.jobs.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "col-span-full text-gray-500 py-8";
+      empty.textContent = "No jobs available right now.";
+      this.container.appendChild(empty);
+      return;
+    }
+
     this.jobs.forEach((job) => {
       const extractedData = this.#extractJobData(job);
       const jobCard = this.#createJobCard(extractedData);

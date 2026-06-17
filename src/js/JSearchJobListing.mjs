@@ -1,4 +1,9 @@
-import { qs, getFromLocalStorage, saveToLocalStorage, markJobAsApplied } from "./utils.mjs";
+import {
+  qs,
+  getFromLocalStorage,
+  saveToLocalStorage,
+  markJobAsApplied,
+} from "./utils.mjs";
 
 const FAV_KEY = "hyerd_favourites";
 
@@ -19,6 +24,7 @@ export default class JSearchJobListing {
 
   async init() {
     this.container = document.getElementById("job-cards-container");
+    this.#showSkeleton(9);
 
     try {
       const response = await this.dataSource.getJSearchJobs();
@@ -28,6 +34,33 @@ export default class JSearchJobListing {
     } catch (error) {
       console.error("Error loading JSearch jobs:", error);
       this.renderError();
+    }
+  }
+
+  #showSkeleton(count = 6) {
+    if (!this.container) return;
+    this.container.innerHTML = "";
+
+    for (let i = 0; i < count; i++) {
+      const skeleton = document.createElement("div");
+      skeleton.className = "job-card animate-pulse";
+      skeleton.innerHTML = `
+        <div class="flex items-start justify-between mb-4">
+          <div class="size-12 rounded-lg bg-gray-200"></div>
+          <div class="w-5 h-5 bg-gray-200 rounded"></div>
+        </div>
+        <div class="h-5 bg-gray-200 rounded w-3/4 mb-2"></div>
+        <div class="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
+        <div class="flex gap-2 mb-4">
+          <div class="h-4 w-16 bg-gray-200 rounded"></div>
+          <div class="h-4 w-12 bg-gray-200 rounded"></div>
+        </div>
+        <div class="flex justify-between items-center">
+          <div class="h-3 w-20 bg-gray-200 rounded"></div>
+          <div class="h-3 w-16 bg-gray-200 rounded"></div>
+        </div>
+      `;
+      this.container.appendChild(skeleton);
     }
   }
 
@@ -93,7 +126,7 @@ export default class JSearchJobListing {
       return;
     }
 
-    this.container.innerHTML = "";
+    this.container.innerHTML = ""; // clear skeletons
 
     if (this.filteredJobs.length === 0) {
       this.renderEmpty();
