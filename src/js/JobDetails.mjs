@@ -1,4 +1,4 @@
-import { loadHeaderFooter, qs } from "./utils.mjs";
+import { loadHeaderFooter, qs, markJobAsApplied } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 export default class JobDetails {
@@ -84,6 +84,18 @@ export default class JobDetails {
     // Apply button
     const applyBtn = clone.querySelector(".job-apply-btn");
     applyBtn.href = job.applyLink || "#";
+    applyBtn.addEventListener("click", () => {
+      markJobAsApplied({
+        id: job.id,
+        title: job.title,
+        organization: job.organization,
+        location: job.location,
+        type: job.type,
+        url: job.applyLink,
+        logo: job.logo,
+        date: job.posted,
+      });
+    });
 
     // Description (Markdown → styled HTML)
     const descContainer = clone.querySelector(".job-description");

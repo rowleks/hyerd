@@ -34,6 +34,22 @@ export const removeFromLocalStorage = (key) => {
   localStorage.removeItem(key);
 };
 
+// Applied jobs helpers
+export const markJobAsApplied = (job) => {
+  const applied = getFromLocalStorage("hyerd_applied") || [];
+  if (!applied.some(j => j.id === job.id)) {
+    applied.push({
+      ...job,
+      appliedAt: new Date().toISOString()
+    });
+    saveToLocalStorage("hyerd_applied", applied);
+  }
+};
+
+export const getAppliedJobs = () => {
+  return getFromLocalStorage("hyerd_applied") || [];
+};
+
 export const loadHeaderFooter = async () => {
   const headerTemplate = await loadTemplate("/partials/header.html");
   const footerTemplate = await loadTemplate("/partials/footer.html");

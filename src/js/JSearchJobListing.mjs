@@ -1,4 +1,4 @@
-import { qs, getFromLocalStorage, saveToLocalStorage } from "./utils.mjs";
+import { qs, getFromLocalStorage, saveToLocalStorage, markJobAsApplied } from "./utils.mjs";
 
 const FAV_KEY = "hyerd_favourites";
 
@@ -164,6 +164,10 @@ export default class JSearchJobListing {
 
     qs(".job-date", article).textContent = this.#formatDate(job.date) || "N/A";
     qs(".apply-link", article).href = job.url || "#";
+    qs(".apply-link", article).addEventListener("click", (e) => {
+      e.stopImmediatePropagation();
+      markJobAsApplied(job);
+    });
 
     const bookmarkBtn = qs(".bookmark-btn", article);
     bookmarkBtn.addEventListener("click", () =>

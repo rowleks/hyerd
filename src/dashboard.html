@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/dashboard.js" type="module"></script>
+    <title>Hyerd | Dashboard</title>
+  </head>
+  <body>
+    <header class="p-5"></header>
+
+    <main class="wrapper my-8">
+      <h1 class="mb-8">Dashboard</h1>
+
+      <!-- Stats Overview -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white rounded-2xl border border-gray-100 p-6">
+          <div class="text-sm text-gray-500">Total Applied</div>
+          <div id="stat-applied" class="text-4xl font-semibold mt-2">0</div>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-100 p-6">
+          <div class="text-sm text-gray-500">Saved Jobs</div>
+          <div id="stat-saved" class="text-4xl font-semibold mt-2">0</div>
+        </div>
+        <div class="bg-white rounded-2xl border border-gray-100 p-6">
+          <div class="text-sm text-gray-500">This Week</div>
+          <div id="stat-week" class="text-4xl font-semibold mt-2">0</div>
+        </div>
+      </div>
+
+      <!-- Applied Jobs Section -->
+      <section class="mb-12">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-semibold">Recently Applied</h2>
+          <a href="/jobs" class="text-sm text-accent hover:underline">Browse more jobs →</a>
+        </div>
+
+        <div id="applied-jobs-container" 
+             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Quick Actions</h2>
+        <div class="flex flex-wrap gap-4">
+          <a href="/jobs" class="btn-accent px-6 py-3 rounded-full inline-block">Search Jobs</a>
+          <a href="/favourites" class="px-6 py-3 rounded-full border inline-block hover:bg-gray-50">View Saved</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Applied Job Card Template -->
+    <template id="applied-job-card-template">
+      <article class="job-card border border-gray-100">
+        <div class="flex items-start justify-between mb-4">
+          <div class="company-logo size-12 rounded-lg bg-emerald-100 flex items-center justify-center overflow-hidden">
+            <img src="" alt="" class="w-full h-full object-contain" />
+          </div>
+          <span class="applied-badge text-xs px-3 py-1 rounded-full bg-green-100 text-green-700 font-medium">Applied</span>
+        </div>
+        
+        <h3 class="job-title text-lg mb-1"></h3>
+        <p class="company-name text-gray-500 text-sm mb-3"></p>
+        
+        <div class="flex items-center gap-2 text-xs text-gray-400 mb-4">
+          <span class="job-location"></span>
+          <span>•</span>
+          <span class="job-type"></span>
+        </div>
+
+        <div class="flex items-center justify-between text-xs">
+          <span class="applied-date text-gray-400"></span>
+          <a class="view-job-link text-primary font-semibold hover:underline" href="" target="_blank">View job</a>
+        </div>
+      </article>
+    </template>
+
+    <footer class="bg-primary text-gray-300 mt-20"></footer>
+  </body>
+</html>

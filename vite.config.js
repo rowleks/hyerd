@@ -13,6 +13,7 @@ export default defineConfig({
         jobs: resolve(__dirname, "src/jobs.html"),
         favourites: resolve(__dirname, "src/favourites.html"),
         jobDetails: resolve(__dirname, "src/jobs/details.html"),
+        dashboard: resolve(__dirname, "src/dashboard.html"),
       },
     },
   },
