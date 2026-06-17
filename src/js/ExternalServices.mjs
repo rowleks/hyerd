@@ -1,39 +1,61 @@
-// const linkedInUrl = import.meta.env.VITE_LINKEDIN_URL;
+const JSEARCH_URL = import.meta.env.VITE_JSEARCH_URL;
+const LINKEDIN_URL = import.meta.env.VITE_LINKEDIN_URL;
+const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY;
 
 export default class ExternalServices {
   async getLatestJobs() {
     try {
-      /* const url = `${linkedInUrl}/active-jb-24h?limit=4&offset=0&title_filter="Developer"&location_filter="United States" OR "Canada"&description_type=html`;
-      const latestJobs = await this.#fetchData(encodeURI(url)); */
-
-      const latestJobs = await this.#fetchData("/json/linkedinJobs.json");
-      console.log(latestJobs);
-      return latestJobs;
+      // Try live LinkedIn first, fallback to local JSON
+      if (LINKEDIN_URL && RAPIDAPI_KEY) {
+        const url = `${LINKEDIN_URL}/active-jb-24h?limit=6&title_filter="developer"&location_filter="United States"`;
+        return await this.#fetchRapidAPI(url);
+      }
+      return await this.#fetchData("/json/linkedinJobs.json");
     } catch (error) {
-      return error.message;
+      console.warn("Falling back to local LinkedIn jobs");
+      return await this.#fetchData("/json/linkedinJobs.json");
     }
   }
 
-  async getJSearchJobs() {
-    return this.#fetchData("/json/jSearchJobs.json");
+  async getJSearchJobs(query = "developer jobs") {
+    try {
+      if (JSEARCH_URL && RAPIDAPI_KEY) {
+        // Using v2 for cursor-based pagination
+        const url = `${JSEARCH_URL}/search-v2?query=${encodeURIComponent(query)}&num_pages=1&country=us&language=en`;
+        return await this.#fetchRapidAPI(url);
+      }
+      return await this.#fetchData("/json/jSearchJobs.json");
+    } catch (error) {
+      console.warn("Falling back to local JSearch jobs");
+      return await this.#fetchData("/json/jSearchJobs.json");
+    }
   }
 
   async getJobDetails(jobId) {
-    // Stub: returns the full response; later replace with real /job-details call
-    const data = await this.#fetchData("/json/jobDetails.json");
-    return data;
+    try {
+      if (JSEARCH_URL && RAPIDAPI_KEY) {
+        const url = `${JSEARCH_URL}/job-details?job_id=${encodeURIComponent(jobId)}&country=us`;
+        return await this.#fetchRapidAPI(url);
+      }
+      return await this.#fetchData("/json/jobDetails.json");
+    } catch (error) {
+      return await this.#fetchData("/json/jobDetails.json");
+    }
   }
 
-  async #fetchData(url) {
-    /*  const options = {
+  async #fetchRapidAPI(url) {
+    const hostname = new URL(url).hostname;
+
+    const options = {
       method: "GET",
       headers: {
-        "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY,
-        "x-rapidapi-host": new URL(url).hostname,
+        "x-rapidapi-key": RAPIDAPI_KEY,
+        "x-rapidapi-host": hostname,
         "Content-Type": "application/json",
       },
-    }; */
-    const res = await fetch(url);
+    };
+
+    const res = await fetch(url, options);
 
     if (!res.ok) {
       throw {
@@ -42,6 +64,17 @@ export default class ExternalServices {
       };
     }
 
+    return await res.json();
+  }
+
+  async #fetchData(url) {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw {
+        name: "Service Error",
+        message: `HTTP ${res.status}: ${res.statusText}`,
+      };
+    }
     return await res.json();
   }
 }
