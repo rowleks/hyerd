@@ -40,7 +40,6 @@ export default class JobListing {
 
   renderJobs() {
     if (!this.container) return;
-    this.container.innerHTML = ""; // clear skeletons
 
     if (!this.jobs || this.jobs.length === 0) {
       const empty = document.createElement("div");
@@ -67,11 +66,14 @@ export default class JobListing {
       organization: job.organization || "",
       location: job.locations_derived?.[0] || job.cities_derived?.[0] || "",
       type: job.employment_type?.[0] || "FULL_TIME",
-      remote: job.remote_derived || false,
+      remote:
+        job.location_type === "TELECOMMUTE" ||
+        job.ai_work_arrangement === "Remote OK" ||
+        job.ai_work_arrangement === "Remote Solely",
       date: job.date_posted || job.date_created,
       url: job.url,
       logo: job.organization_logo,
-      description: job.description_html || "",
+      description: job.description_text || "",
     };
   }
 

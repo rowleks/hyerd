@@ -5,9 +5,8 @@ const RAPIDAPI_KEY = import.meta.env.VITE_RAPIDAPI_KEY;
 export default class ExternalServices {
   async getLatestJobs() {
     try {
-      // Try live LinkedIn first, fallback to local JSON
       if (LINKEDIN_URL && RAPIDAPI_KEY) {
-        const url = `${LINKEDIN_URL}/active-jb-24h?limit=6&title_filter="developer"&location_filter="United States"`;
+        const url = `${LINKEDIN_URL}/active-jb?time_frame=24h&limit=6&offset=0&title=developer&location=%22United%20States%22`;
         return await this.#fetchRapidAPI(url);
       }
       return await this.#fetchData("/json/linkedinJobs.json");
